@@ -1,0 +1,54 @@
+<!-- Add new task -->
+ <div th:fragment="addTask" class="container">
+   <div class="myForm">
+     <form th:action="@{/tasks}" method="post" th:object="${task}">
+       <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+         <div class="modal-dialog" role="document">
+           <div class="modal-content">
+
+             <div class="modal-header">
+               <h5 class="modal-title" id="exampleModalLabel">Add task</h5>
+               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                 <span aria-hidden="true">&times;</span>
+               </button>
+             </div>
+
+             <div class="modal-body">
+
+               <div class="form-group">
+                 <label for="name" class="col-form-label">Name</label>
+                 <input type="text" id="name" name="name" class="form-control" th:field="*{name}" required />
+               </div>
+
+               <div class="form-group">
+                 <label for="description" class="col-form-label">Description</label>
+                 <input type="text" class="form-control" id="description" name="description" th:field="*{description}" required />
+               </div>
+
+               <div class="form-group">
+                 <label for="priority" class="col-form-label">Priority</label>
+                 <input type="number" min="0" class="form-control" id="priority" name="priority" th:field="*{priority}" />
+               </div>
+
+               <div class="form-group">
+                 <label for="category.id" class="col-form-label">Category</label>
+                 <select th:field="*{category}">
+                   <option th:each="category : ${categories}"
+                      th:value="${category.id}"
+                      th:text="${category.name}"/>
+                 </select>
+               </div>
+
+             </div>
+
+             <div class="modal-footer">
+               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+               <input type="submit" class="btn btn-primary" value="Submit" />
+             </div>
+
+             </div>
+           </div>
+         </div>
+       </form>
+     </div>
+ </div>

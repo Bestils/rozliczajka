@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" />
+<head>
+  <div th:fragment="header-includes">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="webjars/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet" media="screen" />
+    <link th:href="@{/css/style.css}" rel="stylesheet" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+  </div>
+</head>
+<body>
+  <nav th:fragment="navbar" class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <ul class="navbar-nav">
+      <li class="nav-item" th:classappend="${#httpServletRequest.requestURI == '/tasks'} ? active : ''">
+        <a class="nav-link" th:href="@{/tasks}">Dashboard</a>
+      </li>
+      <li sec:authorize="hasRole('ADMIN')" th:classappend="${#httpServletRequest.requestURI == '/admin'} ? active : ''">
+         <a class="nav-link" th:href="@{/admin}">Admin Panel</a>
+      </li>
+      <li class="nav-item" th:if="${#httpServletRequest.requestURI == '/tasks'}">
+        <a class="nav-link btn" data-toggle="modal" data-target="#exampleModal">Add task</a>
+      </li>
+      <li class="nav-item" th:if="${#httpServletRequest.requestURI == '/tasks'}">
+        <a class="nav-link btn" data-toggle="modal" data-target="#exampleModalCategory">Add category</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" th:href="@{/logout}">Logout</a>
+      </li>
+    </ul>
+   </nav>
+</body>
+</html>
+

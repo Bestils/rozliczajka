@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" />
+<head>
+  <title>Task List</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <div th:replace="fragments/header :: header-includes" />
+</head>
+<body>
+  <div th:replace="fragments/header :: navbar" />
+  <div class="container">
+    <div class="text-center">
+      <h1>My To-Do List</h1>
+    </div>
+    <div class="row mt-1">
+      <div id="sortableCategories" th:each="category : ${categories}" class="col-sm">
+        <div th:id="${category.name}" th:value="${category.id}" class="connectedSortable">
+          <h2 id="titleCategory" th:text="${category.name}" class="bg-primary text-white text-center p-1" />
+
+           <div th:id="${task.id}" th:each="task : ${category.tasks}">
+             <div class="border border-warning mb-1">
+                <a href="#" class="close-classic float-right mt-1 mr-1"></a>
+                <span class="badge badge-pill badge-warning float-left mt-1 ml-1" th:text="${task.priority}"></span>
+                <h3 th:text="${task.name}" class="text-center"/>
+                <p th:text="${task.description}"></p>
+                <div class="round text-center">
+                  <input th:id="task + ${task.id}" type="checkbox" th:onclick="|changeStatusFinished('${task.id}')|" th:checked="${task.finished}" th:value="${task.id}" />
+                  <label th:for="task + ${task.id}"></label>
+                </div>
+             </div>
+           </div>
+
+         </div>
+      </div>
+    </div>
+  </div>
+  <div th:replace="fragments/addtask :: addTask" />
+  <div th:replace="fragments/addcategory :: addCategory" />
+  <div th:replace="fragments/footer :: footer" />
+</body>
+</html>

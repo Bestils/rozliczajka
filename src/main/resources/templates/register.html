@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" xmlns:spring="http://java.sun.com/xml/ns/javaee">
+  <head >
+    <meta charset="utf-8">
+    <title>Registry website</title>
+    <link  href=" /css/bootstrap.min.css" rel="stylesheet">
+
+
+  </head>
+
+  <body class="bg-dark text-light">
+
+    <div class="container">
+      <div class="py-5 text-center">
+
+        <h2>Zarejstruj się</h2>
+      </div>
+        <div class="col-md-25 order-md-3">
+
+          <form class="needs-validation" action="#" th:action="@{/registry}" th:object="${user}" method="post">
+
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="Login">Login</label>
+
+                <input type="text" class="form-control" id="Login" th:field="*{login}" placeholder="Login"  required>
+                <div class="invalid-feedback">
+                  Valid first name is required.
+                </div>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="password">Hasło</label>
+                <input type="password" class="form-control" id="password" th:field="*{password}"  placeholder="password" required>
+                <div class="invalid-feedback">
+                  Valid last name is required.
+                </div>
+              </div>
+            </div><div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="firstName">Imię</label>
+              <input type="text" class="form-control" id="firstName" placeholder=""  >
+              <div class="invalid-feedback">
+                Valid first name is required.
+              </div>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="lastName">Nazwisko</label>
+              <input type="text" class="form-control" id="lastName" placeholder=""  >
+              <div class="invalid-feedback">
+                Valid last name is required.
+              </div>
+            </div>
+          </div>
+            <div class="mb-3">
+              <label for="email">Email </label>
+              <input type="email" class="form-control" id="email" placeholder="you@example.com" th:field="*{email}"  required>
+              <div class="invalid-feedback">
+                Please enter a valid email address for shipping updates.
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-5 " align="center">
+                <label for="sex">Płeć</label>
+                <select class="custom-select d-block w-1020" id="sex"  >
+                  <option value="">Wybierz</option>
+                  <option>Kobieta</option>
+                  <option>Mężczyzna</option>
+                </select>
+
+            <hr class="mb-4">
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="same-address">
+
+            </div>
+              </div>
+            <hr class="mb-4">
+
+
+
+            <hr class="mb-4">
+            <button class="btn btn-primary btn-lg btn-block" type="submit">Zarejstruj</button>
+          </form>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </body>
+</html>
