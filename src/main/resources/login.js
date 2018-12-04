@@ -225,8 +225,8 @@ $(document).on('click','.email-validation',function(){
 
 /* If student, ask for the login, otherwise ask for email*/
 $(document).on('change','.category select',function(){
-	var category = $(this).val();
-	if(category == 'student'){
+	var member = $(this).val();
+	if(member == 'student'){
 		$(this).parent().siblings('.login').removeClass('is-hidden');
 		$(this).parent().siblings('.email').addClass('is-hidden');
 	}else{

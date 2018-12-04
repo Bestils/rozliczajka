@@ -1,7 +1,7 @@
 package com.sticngo.rozliczajka.domain.category;
 
-import com.sticngo.rozliczajka.infrastructures.error.BusinessErrorCode;
-import com.sticngo.rozliczajka.infrastructures.error.CommonBusinessException;
+import com.sticngo.rozliczajka.infrastructure.error.BusinessErrorCode;
+import com.sticngo.rozliczajka.infrastructure.error.CommonBusinessException;
 
 public class CategoryNotFoundException extends CommonBusinessException {
   private static final String MESSAGE = "Category with id: %s not found";

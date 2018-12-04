@@ -5,3 +5,5 @@ spring:
     facebook:
       app-id: 111638156408802
       app-secret: 3b017e7c110cb2839557c37f27de2a50
+  Datasource:
+    url: jdbc:h2:file:C:\Users\gladius\javaProjects\big\todo-list\src\main\resources\db\base\data.h2

@@ -1,7 +1,7 @@
 package com.sticngo.rozliczajka.domain.task;
 
-import com.sticngo.rozliczajka.infrastructures.error.BusinessErrorCode;
-import com.sticngo.rozliczajka.infrastructures.error.CommonBusinessException;
+import com.sticngo.rozliczajka.infrastructure.error.BusinessErrorCode;
+import com.sticngo.rozliczajka.infrastructure.error.CommonBusinessException;
 
 public class TaskNotFoundException extends CommonBusinessException {
 

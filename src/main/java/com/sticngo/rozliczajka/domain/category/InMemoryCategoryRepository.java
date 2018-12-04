@@ -1,6 +1,6 @@
 package com.sticngo.rozliczajka.domain.category;
 
-import com.sticngo.rozliczajka.infrastructures.persistence.AbstractInMemoryRepository;
+import com.sticngo.rozliczajka.infrastructure.persistence.AbstractInMemoryRepository;
 
 import java.util.List;
 

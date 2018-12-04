@@ -1,9 +1,8 @@
 package com.sticngo.rozliczajka.domain.user;
 
-import com.sticngo.rozliczajka.infrastructures.error.CommonBusinessException;
 import lombok.extern.slf4j.Slf4j;
-import com.sticngo.rozliczajka.infrastructures.error.BusinessErrorCode;
-import com.sticngo.rozliczajka.infrastructures.error.CommonBusinessException;
+import com.sticngo.rozliczajka.infrastructure.error.BusinessErrorCode;
+import com.sticngo.rozliczajka.infrastructure.error.CommonBusinessException;
 
 
 @Slf4j

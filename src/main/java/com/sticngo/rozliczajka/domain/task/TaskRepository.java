@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface TaskRepository extends com.sticngo.rozliczajka.infrastructures.persistence.Repository<Task> {
+public interface TaskRepository extends com.sticngo.rozliczajka.infrastructure.persistence.Repository<Task> {
     Optional<Task> findByIdAndUserId(Long taskId, Long userId);
     List<Task> findTasksByUserId(Long userId);
     List<Task> findTasksByFinishedAndUserId(Boolean status, Long userId);

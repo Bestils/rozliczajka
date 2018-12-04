@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface UserRepository extends
-        com.sticngo.rozliczajka.infrastructures.persistence.Repository<User> {
+        com.sticngo.rozliczajka.infrastructure.persistence.Repository<User> {
 
     User findByLogin(String login);
 }

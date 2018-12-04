@@ -4,5 +4,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface RoleRepository extends
-    com.sticngo.rozliczajka.infrastructures.persistence.Repository<Role>{
+    com.sticngo.rozliczajka.infrastructure.persistence.Repository<Role>{
 }

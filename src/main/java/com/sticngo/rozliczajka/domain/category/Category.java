@@ -1,11 +1,10 @@
 package com.sticngo.rozliczajka.domain.category;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.sticngo.rozliczajka.domain.user.User;
 import lombok.*;
 import com.sticngo.rozliczajka.domain.task.Task;
 import com.sticngo.rozliczajka.domain.user.User;
-import com.sticngo.rozliczajka.infrastructures.persistence.BaseEntity;
+import com.sticngo.rozliczajka.infrastructure.persistence.BaseEntity;
 
 import javax.persistence.*;
 import java.util.List;

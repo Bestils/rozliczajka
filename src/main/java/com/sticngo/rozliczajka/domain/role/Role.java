@@ -1,10 +1,9 @@
 package com.sticngo.rozliczajka.domain.role;
 
-import com.sticngo.rozliczajka.domain.user.User;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
-
-import com.sticngo.rozliczajka.infrastructures.persistence.BaseEntity;
+import com.sticngo.rozliczajka.domain.user.User;
+import com.sticngo.rozliczajka.infrastructure.persistence.BaseEntity;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;

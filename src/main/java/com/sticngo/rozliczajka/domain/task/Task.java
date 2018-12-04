@@ -3,7 +3,7 @@ package com.sticngo.rozliczajka.domain.task;
 import lombok.*;
 import com.sticngo.rozliczajka.domain.category.Category;
 import com.sticngo.rozliczajka.domain.user.User;
-import com.sticngo.rozliczajka.infrastructures.persistence.BaseEntity;
+import com.sticngo.rozliczajka.infrastructure.persistence.BaseEntity;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -48,10 +48,10 @@ public class Task extends BaseEntity {
     this.category.getTasks().add(position, this);
   }
 
-  public void updateUser(User user) {
-    if(getUser() != null)
-      this.user.getTask().remove(this);
-    this.user = user;
-    this.user.addTask(this);
+//  public void updateUser(User user) {
+//    if(getUser() != null)
+//      this.user.getTask().remove(this);
+//    this.user = user;
+//    this.user.addTask(this);
   }
-}
+

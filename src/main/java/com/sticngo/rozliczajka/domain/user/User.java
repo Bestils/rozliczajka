@@ -2,14 +2,14 @@ package com.sticngo.rozliczajka.domain.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.sticngo.rozliczajka.domain.role.Role;
-import com.sticngo.rozliczajka.domain.task.Task;
-import com.sticngo.rozliczajka.infrastructures.persistence.BaseEntity;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
+import com.sticngo.rozliczajka.domain.calculations.Calculation;
+import com.sticngo.rozliczajka.domain.members.Member;
 import lombok.*;
 import com.sticngo.rozliczajka.domain.category.Category;
-//import com.sticngo.rozliczajka.domain.role.Role;
-//import com.sticngo.rozliczajka.domain.task.Task;
-import com.sticngo.rozliczajka.infrastructures.persistence.BaseEntity;
+import com.sticngo.rozliczajka.domain.role.Role;
+import com.sticngo.rozliczajka.domain.task.Task;
+import com.sticngo.rozliczajka.infrastructure.persistence.BaseEntity;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -24,20 +24,22 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-@ToString(exclude = {"task", "category", "roles"})
+@ToString(exclude = {"calculation", "category", "roles","members"})
 public class User extends BaseEntity {
+  private String name;
+  private String surrname;
 
   @Column(name = "login", nullable = false, unique = true)
   @NotNull(message = "Login  is required")
   @NotBlank(message = "Login is required")
-  @Pattern(regexp = "[A-Za-z\\d]{4,255}$", message = "Login has invalid characters")
+  @Pattern(regexp = "[A-Za-z0-9\\d]{9,255}$", message = "Login has invalid characters")
   private String login;
 
 
   @NotNull(message = "Password is required")
   @NotBlank(message = "Password is required")
-  @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&+=])(?=\\S+$).{6,}$", message = "Password  has invalid characters")
-  @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+  @Pattern(regexp = "[a-zA-Z0-9]{12,}", message = "Password  has invalid characters")
+  @JsonProperty(access = Access.WRITE_ONLY)
   private String password;
 
   @NotNull(message = "Email Address is required")
@@ -45,11 +47,18 @@ public class User extends BaseEntity {
   @Email(message = "Email address has invalid format")
   private String email;
 
+
+
   private Boolean enabled = true;
+
+//  @JsonIgnore
+//  @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+//  private List<Task> task;
+//
 
   @JsonIgnore
   @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-  private List<Task> task;
+  private List<Calculation> calculation;
 
   @JsonIgnore
   @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
@@ -64,8 +73,14 @@ public class User extends BaseEntity {
   )
   private Set<Role> roles;
 
-  public void addTask(Task task) {
-    this.task.add(task);
+  private Set<Member> members;
+
+//  public void addTask(Task task) {
+//    this.task.add(task);
+//  }
+
+  public void addCalculation(Calculation calculation) {
+    this.calculation.add(calculation);
   }
 
 }
