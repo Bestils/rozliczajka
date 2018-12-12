@@ -1,1 +1,1 @@
-ALTER TABLE task ADD COLUMN position int;
+ALTER TABLE calculation ADD COLUMN value int;

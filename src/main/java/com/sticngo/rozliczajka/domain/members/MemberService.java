@@ -1,11 +1,13 @@
 package com.sticngo.rozliczajka.domain.members;
 
 
-import com.sticngo.rozliczajka.domain.user.UserService;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 
-import javax.validation.Valid;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+
 import java.util.List;
 import java.util.Optional;
 
@@ -14,7 +16,7 @@ import java.util.Optional;
 public class MemberService {
 
   private final MemberRepository memberRepository;
-  private final UserService userService;
+
 
   public List<Member> findAll() {
     return memberRepository.findAll();
@@ -24,20 +26,30 @@ public class MemberService {
     return memberRepository.findById(id).orElseThrow(() -> new MemberNotFoundException(id));
   }
 
-  public List<Member> findCategoriesByUserId(Long id) {
-    return memberRepository.findMembersByUserId(id);
+  public Member getById(Long id) {
+    return memberRepository.findById(id)
+            .orElseThrow(() -> new MemberNotFoundException(id));
+  }
+
+  public Member findMembersByUserId(Long id) {
+    return memberRepository.findMemberByUserId(id);
   }
 
   public Member save(Member member) {
     return memberRepository.save(member);
   }
 
-  public void updatemember(Member member) {
+  public void updateMember(Member member) {
     Member existmember = memberRepository.findById(member.getId())
         .orElseThrow(() -> new MemberNotFoundException(member.getId()));
 
-    Optional.ofNullable(member.getName())
-        .ifPresent(existmember::setName);
+    Optional.ofNullable(member.getFirstName())
+        .ifPresent(existmember::setFirstName);
+
+    Optional.ofNullable(member.getLastName())
+            .ifPresent(existmember::setLastName);
+    Optional.ofNullable(member.getEmail())
+            .ifPresent(existmember::setEmail);
 
     save(member);
   }
@@ -47,8 +59,5 @@ public class MemberService {
     memberRepository.deleteById(id);
   }
 
-  public Member createForUser(@Valid Member member, Long currentUserId) {
-    member.setUser(userService.getById(currentUserId));
-    return memberRepository.save(member);
-  }
+
 }

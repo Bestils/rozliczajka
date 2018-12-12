@@ -7,8 +7,8 @@ import java.util.Optional;
 
 @Repository
 public interface CalculationRepository extends com.sticngo.rozliczajka.infrastructure.persistence.Repository<Calculation> {
-    Optional<Calculation> findByIdAndUserId(Long taskId, Long userId);
-    List<Calculation> findTasksByUserId(Long userId);
-    List<Calculation> findTasksByFinishedAndUserId(Boolean status, Long userId);
-    List<Calculation> findTasksByMemberNameAndUserIdOrderByPositionAsc(String memberName, Long userId);
+    Optional<Calculation> findByIdAndUserId(Long calculationId, Long userId);
+    List<Calculation> findcalculationsByUserId(Long userId);
+    List<Calculation> findcalculationsByFinishedAndUserId(Boolean status, Long userId);
+    List<Calculation> findcalculationsByMemberNameAndUserIdOrderByPositionAsc(String memberName, Long userId);
 }

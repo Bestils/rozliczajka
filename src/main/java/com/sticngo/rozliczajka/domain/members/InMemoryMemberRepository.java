@@ -10,7 +10,7 @@ public class InMemoryMemberRepository
     implements MemberRepository {
 
   @Override
-  public List<Member> findMembersByUserId(Long id) {
+  public Member findMemberByUserId(Long id) {
     return null;
   }
 }

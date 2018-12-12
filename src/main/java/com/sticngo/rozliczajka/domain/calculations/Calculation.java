@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import com.sticngo.rozliczajka.domain.members.Member;
 import com.sticngo.rozliczajka.domain.role.Role;
-import com.sticngo.rozliczajka.domain.task.Task;
+
 import com.sticngo.rozliczajka.domain.user.User;
 import com.sticngo.rozliczajka.infrastructure.persistence.BaseEntity;
 import lombok.*;
@@ -20,7 +20,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-@ToString(exclude = {"category", "user"})
+@ToString(exclude = {"calculation", "user"})
 public class Calculation extends BaseEntity {
 
   @NotNull
@@ -35,9 +35,6 @@ public class Calculation extends BaseEntity {
 
   private Boolean finished = false;
 
-  @ManyToOne
-  @JoinColumn(name = "category_id")
-  private Member member;
 
   @ManyToOne
   @JoinColumn(name ="user_id")
@@ -50,21 +47,17 @@ public class Calculation extends BaseEntity {
           joinColumns = {@JoinColumn(name = "user_id")},
           inverseJoinColumns = {@JoinColumn(name = "role_id")}
   )
-  private Set<Role> roles;
+  private Set<Member> members;
 
+  private Member memberOwner;
   private int position;
 
 //  public void updateMember(Category category, int position) {
 //    if(getCategory() != null)
-//      this.category.getTasks().remove(this);
+//      this.category.getcalculations().remove(this);
 //    this.category = category;
-//    this.category.getTasks().add(position, this);
+//    this.category.getcalculations().add(position, this);
 //  }
 
-//  public void updateUser(User user) {
-//    if(getUser() != null)
-//      this.user.getTask().remove(this);
-//    this.user = user;
-//    this.user.addCalculation(this);
-//  }
+
 }

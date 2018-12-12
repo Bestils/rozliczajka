@@ -6,9 +6,9 @@ import com.fasterxml.jackson.annotation.JsonProperty.Access;
 import com.sticngo.rozliczajka.domain.calculations.Calculation;
 import com.sticngo.rozliczajka.domain.members.Member;
 import lombok.*;
-import com.sticngo.rozliczajka.domain.category.Category;
+
 import com.sticngo.rozliczajka.domain.role.Role;
-import com.sticngo.rozliczajka.domain.task.Task;
+
 import com.sticngo.rozliczajka.infrastructure.persistence.BaseEntity;
 
 import javax.persistence.*;
@@ -26,8 +26,8 @@ import java.util.Set;
 @EqualsAndHashCode(callSuper = true)
 @ToString(exclude = {"calculation", "category", "roles","members"})
 public class User extends BaseEntity {
-  private String name;
-  private String surrname;
+
+
 
   @Column(name = "login", nullable = false, unique = true)
   @NotNull(message = "Login  is required")
@@ -42,10 +42,6 @@ public class User extends BaseEntity {
   @JsonProperty(access = Access.WRITE_ONLY)
   private String password;
 
-  @NotNull(message = "Email Address is required")
-  @NotBlank(message = "Email Address is required")
-  @Email(message = "Email address has invalid format")
-  private String email;
 
 
 
@@ -53,16 +49,10 @@ public class User extends BaseEntity {
 
 //  @JsonIgnore
 //  @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-//  private List<Task> task;
+//  private List<calculation> calculation;
 //
 
-  @JsonIgnore
-  @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-  private List<Calculation> calculation;
 
-  @JsonIgnore
-  @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-  private List<Category> category;
 
   @JsonIgnore
   @ManyToMany(fetch = FetchType.EAGER)
@@ -73,14 +63,11 @@ public class User extends BaseEntity {
   )
   private Set<Role> roles;
 
-  private Set<Member> members;
 
-//  public void addTask(Task task) {
-//    this.task.add(task);
+//  public void addcalculation(calculation calculation) {
+//    this.calculation.add(calculation);
 //  }
 
-  public void addCalculation(Calculation calculation) {
-    this.calculation.add(calculation);
-  }
+
 
 }

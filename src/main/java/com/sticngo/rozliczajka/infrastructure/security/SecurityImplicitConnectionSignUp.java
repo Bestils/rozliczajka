@@ -1,6 +1,7 @@
 package com.sticngo.rozliczajka.infrastructure.security;
 
 import com.sticngo.rozliczajka.domain.members.MemberRepository;
+import com.sticngo.rozliczajka.domain.user.UserAndMember;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -25,17 +26,15 @@ public class SecurityImplicitConnectionSignUp implements ConnectionSignUp {
   public String execute(Connection<?> connection) {
     UserProfile profile = connection.fetchUserProfile();
     User newUser = new User(
-        profile.getName().replaceAll("\\s+",""),
-            profile.getFirstName(),
-        passwordEncoder.encode("A" +  RandomStringUtils.randomAlphabetic(10) + "!"),
-        profile.getEmail(),
-        profile.getFirstName(),
-        true,
-        null,
-        null,
+            profile.getName().replaceAll("\\s+",""),
+            passwordEncoder.encode("A" +  RandomStringUtils.randomAlphabetic(10) + "!"),
 
-            Collections.singleton(roleRepository.getById(2L)),
-        Collections.singleton(memberRepository.getById(2L))
+            true,
+
+            Collections.singleton(roleRepository.getById(2L))
+
+
+
     );
     userRepository.save(newUser);
     return newUser.getId().toString();

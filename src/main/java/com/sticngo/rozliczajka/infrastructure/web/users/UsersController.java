@@ -1,5 +1,6 @@
 package com.sticngo.rozliczajka.infrastructure.web.users;
 
+import com.sticngo.rozliczajka.domain.user.UserAndMember;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +22,9 @@ import java.util.List;
 @Controller
 public class UsersController {
 
-  final String PATH_USERS_REGISTER_AND_LOGIN = "/login";
+  final String PATH_USERS_LOGIN = "/login";
   final String PATH_USERS_SUCCESS = "/success";
-  final String PATH_USERS_REGGISTER = "/register";
+  final String PATH_USERS_REGISTER = "/register";
   final String PATH_USERS_LOGOUT = "/logout-success";
 
   private final UserService userService;
@@ -31,7 +32,7 @@ public class UsersController {
 @Autowired
  private final PasswordEncoder passwordEncoder;
 
-  @GetMapping(PATH_USERS_REGISTER_AND_LOGIN)
+  @GetMapping(PATH_USERS_LOGIN)
   public String userForm(Model model) {
     model.addAttribute("user", new User());
     return "login";
@@ -48,9 +49,10 @@ public class UsersController {
     return "success";
   }
 
-    @GetMapping(PATH_USERS_REGGISTER)
-    public String userRegisterPage() {
-        return "success";
+    @GetMapping(PATH_USERS_REGISTER)
+    public String registerForm(Model model) {
+        model.addAttribute("user", new UserAndMember());
+        return "register";
     }
 
 

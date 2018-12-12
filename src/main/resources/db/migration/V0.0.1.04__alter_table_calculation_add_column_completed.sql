@@ -1,0 +1,1 @@
+ALTER TABLE calculation ADD COLUMN finished bool;

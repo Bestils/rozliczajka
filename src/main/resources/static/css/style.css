@@ -1,10 +1,10 @@
-.frameForTask {
+.frameForcalculation {
 	border: 1px solid #eee;
 	width: 100%;
 	min-height: 200px;
 }
 
-/*Checkbox for task which is completed or not*/
+/*Checkbox for calculation which is completed or not*/
 .round {
 	position: relative;
 	margin-bottom: 0.5em;

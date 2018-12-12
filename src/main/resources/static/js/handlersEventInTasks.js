@@ -1,10 +1,10 @@
 function changeStatusFinished(id)
 {
-  $.getJSON("/api/tasks/" + id)
-    .done(function(task) {
-      task.finished = !task.finished
-      $.ajax("/api/tasks", {
-        data: JSON.stringify(task),
+  $.getJSON("/api/calculations/" + id)
+    .done(function(calculation) {
+      calculation.finished = !calculation.finished
+      $.ajax("/api/calculations", {
+        data: JSON.stringify(calculation),
         contentType: 'application/json',
         type: 'PATCH'
       });
@@ -16,7 +16,7 @@ var items = [];
 $(document).ready(function() {
   $("#sortableCategories > div").map(function () {
     items.push("#" + this.id);
-    $(this).addClass("frameForTask");
+    $(this).addClass("frameForcalculation");
   });
 });
 
@@ -25,14 +25,14 @@ $(function() {
     connectWith: ".connectedSortable",
     cancel: "#titleCategory",
     stop: function(event, ui) {
-      var taskId = ui.item.attr("id");
+      var calculationId = ui.item.attr("id");
       var newPositionInList = ui.item.index();
       var parent = ui.item.parent().attr('value');
 
       $.ajax({
-        url: "/api/tasks/change",
+        url: "/api/calculations/change",
         data: {
-          "taskId": taskId,
+          "calculationId": calculationId,
           "newPositionInList": newPositionInList - 1,
           "newCategoryId" : parent
         },

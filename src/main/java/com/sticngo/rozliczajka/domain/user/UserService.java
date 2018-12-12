@@ -1,6 +1,7 @@
 package com.sticngo.rozliczajka.domain.user;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +12,9 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class UserService {
 
+
   private final UserRepository userRepository;
+
   private final PasswordEncoder passwordEncoder;
 
   public User getById(Long id) {
@@ -50,8 +53,7 @@ public class UserService {
         .map(passwordEncoder::encode)
         .ifPresent(currentInDatabase::setPassword);
 
-    Optional.ofNullable(user.getEmail())
-        .ifPresent(currentInDatabase::setEmail);
+
 
     Optional.ofNullable(user.getEnabled())
         .ifPresent(currentInDatabase::setEnabled);

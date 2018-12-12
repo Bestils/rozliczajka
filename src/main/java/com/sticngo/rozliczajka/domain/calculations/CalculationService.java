@@ -1,21 +1,23 @@
 package com.sticngo.rozliczajka.domain.calculations;
 
-import com.sticngo.rozliczajka.domain.category.CategoryService;
+
+import com.sticngo.rozliczajka.domain.members.Member;
 import com.sticngo.rozliczajka.domain.members.MemberService;
 import com.sticngo.rozliczajka.domain.user.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.access.prepost.PostAuthorize;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import static java.lang.Math.toIntExact;
 
-@Slf4j
-@Transactional
+@Service
 @RequiredArgsConstructor
 public class CalculationService {
 
@@ -23,8 +25,8 @@ public class CalculationService {
   private final UserService userService;
   private final MemberService memberService;
 
-  public List<Calculation> findTasksBelongToUser(Long idUser) {
-    return calculationRepository.findTasksByUserId(idUser);
+  public List<Calculation> findcalculationsBelongToUser(Long idUser) {
+    return calculationRepository.findcalculationsByUserId(idUser);
   }
 
   @PostAuthorize("returnObject.user.login == authentication.name")
@@ -34,20 +36,23 @@ public class CalculationService {
   }
 
   public List<Calculation> findByStatus(Boolean status, Long userId) {
-    return calculationRepository.findTasksByFinishedAndUserId(status, userId);
+    return calculationRepository.findcalculationsByFinishedAndUserId(status, userId);
   }
 
-  public Calculation save(Calculation task, Long userId) {
-    task.setUser(userService.getById(userId));
-    return calculationRepository.save(task);
+  public Calculation save(Calculation calculation, Long userId) {
+    calculation.setMemberOwner(memberService.getById(userId));
+    return calculationRepository.save(calculation);
   }
 
-  public void deleteById(Long taskId, Long userId) {
-    calculationRepository.findByIdAndUserId(taskId, userId)
-        .orElseThrow(() -> new CalculationNotFoundException(taskId));
+  public void deleteById(Long calculationId, Long userId) {
+    calculationRepository.findByIdAndUserId(calculationId, userId)
+        .orElseThrow(() -> new CalculationNotFoundException(calculationId));
 
-    calculationRepository.deleteById(taskId);
+    calculationRepository.deleteById(calculationId);
   }
+
+
+
 
   public void updateCalculation(Calculation calculation, Long userId) {
     Calculation that = calculationRepository.findByIdAndUserId(calculation.getId(), userId)
@@ -67,20 +72,27 @@ public class CalculationService {
     save(that, userId);
   }
 
-  public Calculation createForUser(@Valid Calculation calculation, Long currentUserId) {
-    calculation.setUser(userService.getById(currentUserId));
-    calculation.setPosition(getNextPositionForTask(calculation.getMember().getName(), currentUserId));
-    return calculationRepository.save(calculation);
+//  public Calculation createForUser(@Valid Calculation calculation, Long currentUserId) {
+//    calculation.setUser(userService.getById(currentUserId));
+//    calculation.setPosition(getNextPositionForcalculation(calculation.getMembers().getName(), currentUserId));
+//    return calculationRepository.save(calculation);
+//  }
+
+  private int getNextPositionForcalculation(String categoryName, Long userId) {
+    List<Calculation> calculations = calculationRepository.findcalculationsByMemberNameAndUserIdOrderByPositionAsc(categoryName, userId);
+    return calculations.size() != 0 ? (calculations.get(calculations.size() - 1).getPosition() + 1) : 0;
   }
 
-  private int getNextPositionForTask(String categoryName, Long userId) {
-    List<Calculation> tasks = calculationRepository.findTasksByMemberNameAndUserIdOrderByPositionAsc(categoryName, userId);
-    return tasks.size() != 0 ? (tasks.get(tasks.size() - 1).getPosition() + 1) : 0;
+  public Set<Member> getMembers(Calculation calculation){
+
+    return  calculation.getMembers();
+
   }
 
-//  public void changeCategory(Long taskId, Long categoryId, Long positionInCategory) {
-//    Calculation that = calculationRepository.findById(taskId)
-//        .orElseThrow(() -> new CalculationNotFoundException(taskId));
+}
+
+//  public void changeCategory(Long calculationId, Long categoryId, Long positionInCategory) {
+//    Calculation that = calculationRepository.findById(calculationId)
+//        .orElseThrow(() -> new CalculationNotFoundException(calculationId));
 //    that.updateCategory(categoryService.findById(categoryId), toIntExact(positionInCategory));
 //  }
-}

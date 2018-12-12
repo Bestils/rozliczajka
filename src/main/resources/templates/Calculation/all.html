@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" />
 <head>
-  <title>Task List</title>
+  <title>calculation List</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <div th:replace="fragments/header :: header-includes" />
 </head>
@@ -16,15 +16,15 @@
         <div th:id="${category.name}" th:value="${category.id}" class="connectedSortable">
           <h2 id="titleCategory" th:text="${category.name}" class="bg-primary text-white text-center p-1" />
 
-           <div th:id="${task.id}" th:each="task : ${category.tasks}">
+           <div th:id="${calculation.id}" th:each="calculation : ${members.calculations}">
              <div class="border border-warning mb-1">
                 <a href="#" class="close-classic float-right mt-1 mr-1"></a>
-                <span class="badge badge-pill badge-warning float-left mt-1 ml-1" th:text="${task.priority}"></span>
-                <h3 th:text="${task.name}" class="text-center"/>
-                <p th:text="${task.description}"></p>
+                <span class="badge badge-pill badge-warning float-left mt-1 ml-1" th:text="${calculation.value}"></span>
+                <h3 th:text="${calculation.name}" class="text-center"/>
+                <p th:text="${calculation.description}"></p>
                 <div class="round text-center">
-                  <input th:id="task + ${task.id}" type="checkbox" th:onclick="|changeStatusFinished('${task.id}')|" th:checked="${task.finished}" th:value="${task.id}" />
-                  <label th:for="task + ${task.id}"></label>
+                  <input th:id="calculation + ${calculation.id}" type="checkbox" th:onclick="|changeStatusFinished('${calculation.id}')|" th:checked="${calculation.finished}" th:value="${calculation.id}" />
+                  <label th:for="calculation + ${calculation.id}"></label>
                 </div>
              </div>
            </div>
@@ -33,7 +33,7 @@
       </div>
     </div>
   </div>
-  <div th:replace="fragments/addtask :: addTask" />
+  <div th:replace="fragments/addcalculation :: addcalculation" />
   <div th:replace="fragments/addcategory :: addCategory" />
   <div th:replace="fragments/footer :: footer" />
 </body>

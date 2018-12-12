@@ -12,16 +12,16 @@
 <body>
   <nav th:fragment="navbar" class="navbar navbar-expand-sm bg-dark navbar-dark">
     <ul class="navbar-nav">
-      <li class="nav-item" th:classappend="${#httpServletRequest.requestURI == '/tasks'} ? active : ''">
-        <a class="nav-link" th:href="@{/tasks}">Dashboard</a>
+      <li class="nav-item" th:classappend="${#httpServletRequest.requestURI == '/calculations'} ? active : ''">
+        <a class="nav-link" th:href="@{/calculations}">Dashboard</a>
       </li>
       <li sec:authorize="hasRole('ADMIN')" th:classappend="${#httpServletRequest.requestURI == '/admin'} ? active : ''">
          <a class="nav-link" th:href="@{/admin}">Admin Panel</a>
       </li>
-      <li class="nav-item" th:if="${#httpServletRequest.requestURI == '/tasks'}">
-        <a class="nav-link btn" data-toggle="modal" data-target="#exampleModal">Add task</a>
+      <li class="nav-item" th:if="${#httpServletRequest.requestURI == '/calculations'}">
+        <a class="nav-link btn" data-toggle="modal" data-target="#exampleModal">Add calculation</a>
       </li>
-      <li class="nav-item" th:if="${#httpServletRequest.requestURI == '/tasks'}">
+      <li class="nav-item" th:if="${#httpServletRequest.requestURI == '/calculations'}">
         <a class="nav-link btn" data-toggle="modal" data-target="#exampleModalCategory">Add category</a>
       </li>
       <li class="nav-item">

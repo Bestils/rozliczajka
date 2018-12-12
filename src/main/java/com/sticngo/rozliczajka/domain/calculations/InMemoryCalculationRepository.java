@@ -7,42 +7,59 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
- * Simple TaskRepository implementation for unit testing
+ * Simple calculationRepository implementation for unit testing
  */
 public class InMemoryCalculationRepository
     extends AbstractInMemoryRepository<Calculation>
     implements CalculationRepository {
 
   @Override
-  public Optional<Calculation> findByIdAndUserId(Long taskId, Long userId) {
-    return findById(taskId)
-        .filter(task -> task.getUser() != null)
-        .filter(task -> task.getUser().getId().equals(userId));
+  public Optional<Calculation> findByIdAndUserId(Long calculationId, Long userId) {
+    return findById(calculationId)
+        .filter(calculation -> calculation.getUser() != null)
+        .filter(calculation -> calculation.getUser().getId().equals(userId));
   }
 
   @Override
-  public List<Calculation> findTasksByUserId(Long userId) {
+  public List<Calculation> findcalculationsByUserId(Long userId) {
     return findAll().stream()
-        .filter(task -> task.getUser() != null)
-        .filter(task -> task.getUser().getId().equals(userId))
+        .filter(calculation -> calculation.getUser() != null)
+        .filter(calculation -> calculation.getUser().getId().equals(userId))
         .collect(Collectors.toList());
   }
 
   @Override
-  public List<Calculation> findTasksByFinishedAndUserId(Boolean status, Long userId) {
+  public List<Calculation> findcalculationsByFinishedAndUserId(Boolean status, Long userId) {
     return findAll().stream()
-        .filter(task -> task.getUser() != null)
-        .filter(task -> task.getUser().getId().equals(userId))
-        .filter(task -> task.getFinished().equals(status))
+        .filter(calculation -> calculation.getUser() != null)
+        .filter(calculation -> calculation.getUser().getId().equals(userId))
+        .filter(calculation -> calculation.getFinished().equals(status))
         .collect(Collectors.toList());
   }
-
 
   @Override
-  public List<Calculation> findTasksByMemberNameAndUserIdOrderByPositionAsc(String memberName, Long userId) {
-    return findAll().stream()
-        .filter(task -> task.getMember().getName() == memberName)
-        .filter(task -> task.getUser().getId() == userId)
-        .collect(Collectors.toList());
+  public List<Calculation> findcalculationsByMemberNameAndUserIdOrderByPositionAsc(String memberName, Long userId) {
+    return null;
   }
+
+
+
+
+
+
+
+//  @Override
+//  public List<Calculation> findcalculationsByMemberNameAndUserIdOrderByPositionAsc(String memberName, Long userId) {
+//    return findAll().stream()
+//        .filter(calculation -> calculation.getMembers().stream()
+//
+//               . filter(members -> members.getFirstName().
+//               . filter(members -> members.getLastName().
+//
+//
+//
+//                getName() == memberName)
+//        .filter(calculation -> calculation.getUser().getId() == userId)
+//        .collect(Collectors.toList());
+//  }
 }
